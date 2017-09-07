@@ -4,7 +4,7 @@ The plan is simple. An open source, MIT Licensed web application which serves as
 
 ## Usage
 
-You'll need docker. The application aims to be runable in docker by doing nothing more than `git checkout https://github.com/allison-knauss/arkweb` followed by `docker-compose up`. Production deployments may require an extra step or two.
+You'll need docker. The application aims to be runable in docker by doing nothing more than `git clone https://github.com/allison-knauss/arkweb` followed by `docker-compose up`. Production deployments may require an extra step or two.
 
 ## Technology
 
