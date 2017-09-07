@@ -1,9 +1,15 @@
 import imp
 from migrate.versioning import api
 import sqlalchemy
-from app import db
 import os
 import sys
+from models.base import metadata
+from repositories import base_repository
+
+# create_all requires all models to be imported
+# For now, just do that here
+from models.page import Page
+
 
 SQLALCHEMY_ENGINE_URI = os.environ['SQLALCHEMY_ENGINE_URI']
 SQLALCHEMY_DATABASE = os.environ['SQLALCHEMY_DATABASE']
@@ -20,7 +26,7 @@ def createdb():
 
 def create():
     createdb()
-    db.create_all()
+    metadata.create_all(base_repository.engine)
     if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
         api.create(SQLALCHEMY_MIGRATE_REPO, 'database repository')
         api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
@@ -34,7 +40,7 @@ def migrate():
     tmp_module = imp.new_module('old_model')
     old_model = api.create_model(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
     exec(old_model, tmp_module.__dict__)
-    script = api.make_update_script_for_model(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO, tmp_module.meta, db.metadata)
+    script = api.make_update_script_for_model(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO, tmp_module.meta, metadata)
     open(migration, "wt").write(script)
     api.upgrade(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
     v = api.db_version(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)

@@ -19,7 +19,7 @@ services:
             - service-tier
             - web-tier
         environment:
-            - SQLALCHEMY_ENGINE_URI=postgresql://postgres@db
+            - SQLALCHEMY_ENGINE_URI=postgresql://arkweb:arkweb@db
             - SQLALCHEMY_DATABASE=arkapi
             - SQLALCHEMY_MIGRATE_REPO=db_repository
             - SQLALCHEMY_TRACK_NOTIFICATIONS=true

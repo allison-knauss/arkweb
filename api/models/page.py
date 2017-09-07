@@ -1,10 +1,24 @@
-from app import db
+from base import Base
+from sqlalchemy import Column, Integer, String
+from marshmallow import Schema, fields, post_load
 
-class Page(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    path = db.Column(db.String(255))
-    title = db.Column(db.String(64))
-    content = db.Column(db.String(9999))
+class Page(Base):
+    __tablename__ = 'pages'
+
+    id = Column(Integer, primary_key=True)
+    path = Column(String)
+    title = Column(String)
+    content = Column(String)
 
     def __repr__(self):
-        return '<Page %r>' % (self.title)
+        return str(PageSchema().dumps(self).data)
+
+class PageSchema(Schema):
+    id = fields.Int()
+    path = fields.String()
+    title = fields.String()
+    content = fields.String()
+
+    @post_load
+    def make_user(self, data):
+        return Page(**data)
