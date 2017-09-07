@@ -27,3 +27,9 @@ You'll need docker. The application aims to be runable in docker by doing nothin
 - api/ contains all code for the api service
 - web/ contains all code for the web service
 - test/ contains all unit test code
+
+## Services
+
+- arkweb, the web service, serves as a custom CMS-ish service, it serves static and dynamic web content. As a web-tier service, it communicates solely with arkapi and anything else that may be put in the service tier.
+- arkapi, the api service, presents a REST API and contains application business logic. It is in the service-tier.
+- db, the database service, is in the data-tier.
