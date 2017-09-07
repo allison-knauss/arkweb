@@ -24,4 +24,6 @@ You'll need docker. The application aims to be runable in docker by doing nothin
 
 ## Repository layout
 
-Coming soon
+- api/ contains all code for the api service
+- web/ contains all code for the web service
+- test/ contains all unit test code

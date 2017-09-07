@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+    arkweb:
+        build: ./web
+        container_name: arkweb
+        ports:
+            - "5000:5000"
+        networks:
+            - web-tier
+
+    arkapi:
+        build: ./api
+        container_name: arkapi
+        ports:
+            - "5001:5001"
+        networks: 
+            - data-tier
+            - service-tier
+            - web-tier
+
+    db:
+        image: postgres:9.4
+        container_name: db
+        networks:
+            - data-tier
+
+networks:
+    web-tier:
+    service-tier:
+    data-tier:
