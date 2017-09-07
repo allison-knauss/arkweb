@@ -1,1 +1,8 @@
 Flask==0.10.1
+SQLAlchemy==1.1.14
+Flask-SQLAlchemy==2.2
+Tempita==0.5.2
+pbr==3.1.1
+sqlparse==0.2.3
+sqlalchemy-migrate==0.11.0
+psycopg2==2.7.3.1

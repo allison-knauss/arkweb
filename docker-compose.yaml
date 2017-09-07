@@ -18,12 +18,20 @@ services:
             - data-tier
             - service-tier
             - web-tier
+        environment:
+            - SQLALCHEMY_ENGINE_URI=postgresql://postgres@db
+            - SQLALCHEMY_DATABASE=arkapi
+            - SQLALCHEMY_MIGRATE_REPO=db_repository
+            - SQLALCHEMY_TRACK_NOTIFICATIONS=true
 
     db:
         image: postgres:9.4
         container_name: db
         networks:
             - data-tier
+        environment:
+            - POSTGRES_USER=arkweb
+            - POSTGRES_PASSWORD=arkweb
 
 networks:
     web-tier:
