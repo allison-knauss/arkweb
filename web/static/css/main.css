@@ -1,0 +1,11 @@
+.content {
+    margin-top: 80px;
+}
+
+footer {
+    width: 100%;
+}
+
+footer > .container {
+    font-size: 8pt;
+}

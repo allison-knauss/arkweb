@@ -8,5 +8,5 @@ import base
 def index():
     title = 'ARK'
     welcome = 'Welcome!'
-    return render_template('index.html', nav=base.nav(), title=title, welcome=welcome)
+    return render_template('index.html', nav=base.nav('/'), title=title, welcome=welcome)
 
