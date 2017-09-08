@@ -5,7 +5,8 @@ import base
 
 @app.route('/<path:path>')
 def content(path):
-    page = page_client.find(path).json()
-    if len(page) == 0:
+    pageData = page_client.find(path)
+    if pageData == None or pageData.text == '{}':
         return render_template('404.html', nav=base.nav('/' + path))
+    page = pageData.json()
     return render_template('content.html', nav=base.nav('/' + path), **page)

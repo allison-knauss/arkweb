@@ -24,15 +24,17 @@ def createdb():
     except:
         pass
 
-def create():
-    createdb()
+def create_in_db():
     metadata.create_all(base_repository.engine)
+    print('Created in database')
+
+def generate():
     if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
         api.create(SQLALCHEMY_MIGRATE_REPO, 'database repository')
         api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
     else:
         api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO, api.version(SQLALCHEMY_MIGRATE_REPO))
-    print('Created repository')
+    print('Created migrations')
 
 def migrate():
     v = api.db_version(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
@@ -62,7 +64,12 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
 
     if cmd == 'create':
-        create()
+        create_in_db()
+        generate()
+    elif cmd == 'generate':
+        generate()
+    elif cmd == 'createdb':
+        createdb()
     elif cmd == 'migrate':
         migrate()
     elif cmd == 'upgrade':

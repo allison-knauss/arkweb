@@ -9,6 +9,7 @@ class Page(Base):
     path = Column(String)
     title = Column(String)
     content = Column(String)
+    template = Column(String)
 
     def __repr__(self):
         return str(PageSchema().dumps(self).data)
@@ -18,6 +19,7 @@ class PageSchema(Schema):
     path = fields.String()
     title = fields.String()
     content = fields.String()
+    template = fields.String()
 
     @post_load
     def make_user(self, data):
