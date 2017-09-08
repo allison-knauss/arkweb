@@ -9,6 +9,8 @@ from repositories import base_repository
 # create_all requires all models to be imported
 # For now, just do that here
 from models.page import Page
+from models.blog import Blog
+from models.blog_post import BlogPost
 
 
 SQLALCHEMY_ENGINE_URI = os.environ['SQLALCHEMY_ENGINE_URI']
