@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="blog-header">
+    <div class="container">
+        <h1 class="blog-title">{{page.title}}</h1>
+        <p class="lead blog-description">{{page.content}}</p> <!-- TODO -->
+    </div>
+</div>
+
+<div class="container">
+    
+    <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+        {% for post in blog.posts %}
+            <div class="blog-post">
+                <h2 class="blog-post-title">{{post.title}}</h2>
+                <p class="blog-post-meta">{{post.date}}</h2>
+                {{post.content}}
+            </div>
+        {% endfor %}
+
+          <nav class="blog-pagination">
+            <a class="btn btn-outline-primary" href="{{page.path}}?page=1">Older</a>
+            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 offset-sm-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            {{ blog.about }}
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              {% for group in blog.archive %}
+                <li><a href="{{page.path}}{{group.query}}">{{group.name}}</a></li>
+              {% endfor %}
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+      </div><!-- /.row -->
+</div>
+
+{% endblock %}

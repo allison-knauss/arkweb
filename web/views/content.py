@@ -9,4 +9,10 @@ def content(path):
     if pageData == None or pageData.text == '{}':
         return render_template('404.html', nav=base.nav('/' + path))
     page = pageData.json()
-    return render_template('content.html', nav=base.nav('/' + path), **page)
+
+    pageData = {
+        'page': page,
+        'blog': {}
+    }
+
+    return render_template(page['template'], nav=base.nav('/' + path), **pageData)
